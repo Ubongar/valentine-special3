@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dessert</title>
+    <link rel="stylesheet" href="css/dessert.css" />
+  </head>
+  <body>
+    <div id="dessertquestion">Which dessert we eatin ma'am <br> Afar only pick one oh relax</div>
+    <div class="dessert-selection">
+      <div class="dessert-item">
+        <img src="food/meshai.jpg" alt="Meshai" />
+        <label
+          ><input type="checkbox" name="dessert" value="Meshai" /> Meshai</label
+        >
+      </div>
+      <div class="dessert-item">
+        <img src="food/icecream.jpg" alt="ice cream" />
+        <label
+          ><input type="checkbox" name="dessert" value="ice cream" /> ice cream</label
+        >
+      </div>
+      <div class="dessert-item">
+        <img src="food/shwarma.jpg" alt="Shawarma" />
+        <label><input type="checkbox" name="dessert" value="Shawarma" /> Shawarma</label>
+      </div>
+      <div class="dessert-item">
+        <img src="food/waffledom.jpg" alt="waffledom?" />
+        <label
+          ><input type="checkbox" name="dessert" value="waffledom?" /> idk drinks at waffledom?</label
+        >
+      </div>
+      <div class="dessert-item">
+        <img src="food/susage rolls.jpg" alt="Susage Rolls" />
+        <label
+          ><input type="checkbox" name="dessert" value="Susage Rolls" />Susage Rolls</label
+        >
+      </div>
+      <div class="dessert-item">
+        <img src="food/zobo.jpg" alt="zobo" />
+        <label
+          ><input type="checkbox" name="dessert" value="zobo" />
+          You will like caf zobo oh?</label
+        >
+      </div>
+    </div>
+    <script>
+      document.querySelectorAll('input[name="dessert"]').forEach((radio) => {
+        radio.addEventListener("change", function () {
+          localStorage.setItem("selectedDessert", this.value);
+          console.log("Dessert saved:", this.value); // Debugging
+        });
+      });
+    </script>
+    
+    <button class="button" onclick="location.href='activities.html'">
+      Continue !!!
+    </button>
+  </body>
+</html>

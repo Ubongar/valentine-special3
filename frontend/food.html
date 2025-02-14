@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Selection</title>
+    <link rel="stylesheet" href="css/food.css" />
+  </head>
+  <body>
+    <div id="foodquestion">
+      <b>What food would you like to eat?<br> If you like pick more than one I will run away😒</b>
+    </div>
+
+    <div class="food-selection">
+      <div class="food-item">
+        <img src="food/rice.jpg" alt="rice" />
+        <label
+          ><input
+            type="checkbox"
+            name="food"
+            value="White rice and Chicken"
+          />
+        White rice and Chicken</label
+        >
+      </div>
+      <div class="food-item">
+        <img src="food/jollof.jpg" alt="rice" />
+        <label
+          ><input type="checkbox" name="food" value="Jollof Rice and Turkey/Chicken" /> Jollof Rice and Turkey/Chicken</label
+        >
+      </div>
+      <div class="food-item">
+        <img src="food/egusi.jpg" alt="Eba" />
+        <label
+          ><input type="checkbox" name="food" value="Eba/Semo and Egusi" /> Eba/Semo and Egusi</label
+        >
+      </div>
+      <div class="food-item">
+        <img src="food/pasta.jpeg" alt="pasta" />
+        <label><input type="checkbox" name="food" value="pasta" /> pasta</label>
+      </div>
+      <div class="food-item">
+        <img src="food/efo.jpg" alt="semo" />
+        <label><input type="checkbox" name="food" value="Semo/Eba and Efo riro" /> Semo/Eba and Efo riro</label>
+      </div>
+      <div class="food-item">
+        <img src="food/salad.jpeg" alt="salad" />
+        <label><input type="checkbox" name="food" value="salad" /> salad</label>
+      </div>
+      <div class="food-item">
+        <img src="food/amala.jpg" alt="nigerianfood" />
+        <label><input type="checkbox" name="food" value="Amala and Ewedu" /> Amala and Ewedu</label>
+      </div>
+      <div class="food-item">
+        <img src="food/sushi.jpeg" alt="sushi" />
+        <label><input type="checkbox" name="food" value="sushi" /> sushi with a sprinkle of where you wan see am</label>
+      </div>
+    </div>
+    <script>
+      document.querySelectorAll('input[name="food"]').forEach((checkbox) => {
+        checkbox.addEventListener("change", function () {
+          let selectedFoods = JSON.parse(localStorage.getItem("selectedFood") || "[]");
+    
+          if (this.checked) {
+            if (!selectedFoods.includes(this.value)) {
+              selectedFoods.push(this.value);
+            }
+          } else {
+            selectedFoods = selectedFoods.filter(item => item !== this.value);
+          }
+    
+          localStorage.setItem("selectedFood", JSON.stringify(selectedFoods)); // Ensure JSON format
+          console.log("Updated Food:", selectedFoods); // Debugging log
+        });
+      });
+    </script>
+    
+    <button class="button" onclick="location.href='dessert.html'">
+      Continue !!!
+    </button>
+  </body>
+</html>

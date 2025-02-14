@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Activities</title>
+    <link rel="stylesheet" href="css/activities.css" />
+  </head>
+  <body>
+    <div id="activityquestion"><b>What are we doing after?</b></div>
+    <div id="activityquestion"><b>You thought you'll just go back and sleep ba</b></div>
+    <div class="activities-selection">
+      <div class="activity-item">
+        <img src="activities/walking.jpg" alt="Walk" />
+        <label
+          ><input
+            type="checkbox"
+            name="activities"
+            value="walk"
+          /> walk around campus</label
+        >console.log("Checkbox changed");
+      </div>
+      <div class="activity-item">
+        <img src="activities/basketball.jpg" alt="basketball" />
+        <label
+          ><input
+            type="checkbox"
+            name="activities"
+            value="basketball"
+          />basketball</label
+        >
+      </div>
+      <div class="activity-item">
+        <img src="activities/sleep.jpg" alt="call it a day" />
+        <label
+          ><input
+            type="checkbox"
+            name="activities"
+            value="day"
+          />call it a day? na there dem go seee you mtcheewwww </label
+        >
+      </div>
+      <div class="activity-item">
+        <img src="activities/fellowship.jpg" alt="Fellowship" />
+        <label
+          ><input
+            type="checkbox"
+            name="activities"
+            value="Fellowship"
+          />Fellowship</label
+        >
+      </div>
+      <div class="activity-item">
+        <img src="activities/gist.jpg" alt="casual sit and gist" />
+        <label
+          ><input
+            type="checkbox"
+            name="activities"
+            value="sit and gist"
+          />casual sit and gist amebo much?</label
+        >
+      </div>
+    </div>
+    <script>
+      document.querySelectorAll('input[name="activities"]').forEach((checkbox) => {
+        checkbox.addEventListener("change", function () {
+          let selectedActivities = JSON.parse(localStorage.getItem("selectedActivities") || "[]");
+    
+          if (this.checked) {
+            if (!selectedActivities.includes(this.value)) {
+              selectedActivities.push(this.value);
+            }
+          } else {
+            selectedActivities = selectedActivities.filter(item => item !== this.value);
+          }
+    
+          localStorage.setItem("selectedActivities", JSON.stringify(selectedActivities)); // Ensure JSON format
+          console.log("Updated Activities:", selectedActivities); // Debugging
+        });
+      });
+    </script>
+    
+    
+    <button class="button" onclick="location.href='lastpage.html'">
+      Last page
+    </button>
+  </body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thank You</title>
+  <link rel="stylesheet" href="css/flower.css" />
+  <style>
+    /* Reset & background */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Heading */
+    #thankyou {
+      text-align: center;
+      font-size: 26px;
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    /* Main container */
+    .container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between; /* Push items apart */
+      align-items: center;
+      width: 90%;
+      max-width: 1200px;
+      height: 90vh; /* Adjust height to fit full flower */
+      padding: 20px;
+    }
+
+    /* Overview section (Date Choices) */
+    .overview {
+      flex: 0 0 30%; /* Take up less space */
+      background-color: rgba(255, 230, 230, 0.9);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
+
+    .overview h2 {
+      color: #d6336c;
+      margin-bottom: 15px;
+    }
+
+    .overview p {
+      font-size: 18px;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: #fff;
+      text-align: left;
+    }
+
+    /* Flower container (Proper positioning & visibility) */
+    .flower-container {
+      flex: 0 0 50%; /* Adjust width */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      position: relative;
+      overflow: visible; /* Ensure nothing is hidden */
+    }
+
+    /* Flower size & positioning */
+    .flower {
+      max-width: 400px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .f-wrapper {
+      position: relative;
+      transform: translateY(-10%);
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+  <div id="thankyou">
+    💖 Thank you for being my Val!<br/>
+    Babe soon? Hmm... only God knows 😘
+  </div>
+
+  <div class="container">
+    <input type="text" id="your-name" placeholder="Name">
+<input type="text" id="crush-name" placeholder="Crush">
+<button id="check-love">💖 Check Love %</button>
+<p id="love-result"></p>
+
+    <!-- Date choices on the far left -->
+    <div class="overview">
+      <h2>Your Date Choices 💕</h2>
+      <p><strong>Food:</strong> <span id="food-display">Loading...</span></p>
+      <p><strong>Dessert:</strong> <span id="dessert-display">Loading...</span></p>
+      <p><strong>Activities:</strong> <span id="activities-display">Loading...</span></p>
+      <p><strong>Date:</strong> <span id="date-display">Loading...</span></p>
+      <button id="reset-button">🔄 Start Over</button>
+      <button id="capture-button">📸 Capture & Share To Me</button>
+      <audio id="bg-music" loop>
+        <source src="love-song.mp3" type="audio/mp3">
+      </audio>
+      <button id="toggle-music">🎵 Play Music</button>
+      
+    </div>
+
+    <!-- Flower in the right-middle, fully visible -->
+    <div class="flower-container">
+      <div class="flower">
+        <div class="f-wrapper">
+          <div class="flower__line"></div>
+          <div class="f">
+            <div class="flower__leaf flower__leaf--1"></div>
+            <div class="flower__leaf flower__leaf--2"></div>
+            <div class="flower__leaf flower__leaf--3"></div>
+            <div class="flower__leaf flower__leaf--4"></div>
+            <div class="flower__leaf flower__leaf--5"></div>
+            <div class="flower__leaf flower__leaf--6"></div>
+            <div class="flower__leaf flower__leaf--7"></div>
+            <div class="flower__leaf flower__leaf--8 flower__fall-down--yellow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function () {
+      console.log("Loading values from localStorage...");
+
+      let selectedFood = localStorage.getItem("selectedFood");
+      let selectedActivities = localStorage.getItem("selectedActivities");
+
+      try {
+        selectedFood = JSON.parse(selectedFood) || [];
+      } catch (error) {
+        selectedFood = []; 
+      }
+
+      try {
+        selectedActivities = JSON.parse(selectedActivities) || [];
+      } catch (error) {
+        selectedActivities = []; 
+      }
+
+      const selectedDessert = localStorage.getItem("selectedDessert") || "Not Selected";
+      const selectedDate = localStorage.getItem("selectedDate") || "Not Selected";// Load date
+
+      console.log("Food:", selectedFood);
+      console.log("Dessert:", selectedDessert);
+      console.log("Activities:", selectedActivities);
+      console.log("Date:", selectedDate);
+
+      document.getElementById("food-display").innerText = selectedFood.length > 0 ? selectedFood.join(", ") : "Not Selected";
+      document.getElementById("dessert-display").innerText = selectedDessert;
+      document.getElementById("activities-display").innerText = selectedActivities.length > 0 ? selectedActivities.join(", ") : "Not Selected";
+      document.getElementById("date-display").innerText = selectedDate;
+
+      document.getElementById("reset-button").addEventListener("click", function () {
+        if (confirm("Are you sure you want to start over? This will reset all choices.")) {
+          localStorage.clear();  // Clear all selections
+          window.location.href = "index.html"; // Redirect to start
+        }
+      });
+    };
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      gsap.from(".container", { opacity: 0, y: 50, duration: 1 });
+      gsap.from("#thankyou", { opacity: 0, scale: 0.8, duration: 1 });
+    });
+  </script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    document.getElementById("capture-button").addEventListener("click", function () {
+      confetti(); // 🎉 Confetti effect
+  
+      // Get selected choices
+      const selectedFood = localStorage.getItem("selectedFood") || "Not Selected";
+      const selectedDessert = localStorage.getItem("selectedDessert") || "Not Selected";
+      const selectedActivities = localStorage.getItem("selectedActivities") || "Not Selected";
+      const selectedDate = localStorage.getItem("selectedDate") || "Not Selected";
+  
+      // Format email content
+      const email = "mikeerap14@gmail.com";
+      const subject = encodeURIComponent("💖 My Valentine Date Choices!");
+      const body = encodeURIComponent(
+        `Hey, here are my selected date choices! 💕\n\n` +
+        `🍽️ Food: ${selectedFood}\n` +
+        `🍰 Dessert: ${selectedDessert}\n` +
+        `🎉 Activities: ${selectedActivities}\n` +
+        `📅 Date: ${selectedDate}\n\n` +
+        `Sending love! ❤️`
+      );
+  
+      // Capture screenshot and show message for iPhones
+      html2canvas(document.body).then(canvas => {
+        canvas.toBlob(blob => {
+          const file = new File([blob], "valentine.png", { type: "image/png" });
+  
+          if (navigator.userAgent.includes("iPhone") || navigator.userAgent.includes("iPad")) {
+            alert("📸 Screenshot taken! Please manually attach it to an email.");
+          } else {
+            const a = document.createElement("a");
+            a.href = `mailto:${email}?subject=${subject}&body=${body}`;
+            a.click();
+          }
+        });
+      });
+    });
+  </script>
+  
+<script>
+  document.getElementById("check-love").addEventListener("click", function () {
+    const yourName = document.getElementById("your-name").value.trim();
+    const crushName = document.getElementById("crush-name").value.trim();
+    
+    if (yourName === "" || crushName === "") {
+      alert("Please enter both names!");
+      return;
+    }
+
+    const loveScore = Math.floor(Math.random() * 101); // Random 0-100%
+    document.getElementById("love-result").innerText = `❤️ ${yourName} & ${crushName}: ${loveScore}% Love Match! (it's random abeg oh)`;
+  });
+</script>
+
+<script>
+  const music = document.getElementById("bg-music");
+  const musicButton = document.getElementById("toggle-music");
+
+  musicButton.addEventListener("click", function () {
+    if (music.paused) {
+      music.play();
+      musicButton.innerText = "⏸ Pause Music";
+    } else {
+      music.pause();
+      musicButton.innerText = "🎵 Play Music";
+    }
+  });
+</script>
+<script>
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 5000);
+  }
+
+  setInterval(createHeart, 500);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1"></script>
+</body>
+</html>
